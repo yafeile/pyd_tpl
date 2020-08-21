@@ -98,11 +98,11 @@ static PyMethodDef module_methods[] = {
     {NULL}  /* Sentinel */
 };
 
-PyMODINIT_FUNC init{{ class_name }}() {
+PyMODINIT_FUNC init{{ module_name }}() {
     PyObject* m;
     if (PyType_Ready(&{{ class_name|lower }}_type) < 0)
         return;
-    m = Py_InitModule3("{{ class_name }}", module_methods,"");
+    m = Py_InitModule3("{{ module_name }}", module_methods,"");
     if (m == NULL)
         return;
     Py_INCREF(&{{ class_name|lower }}_type);

@@ -52,7 +52,7 @@ static PyMethodDef {{ class_name|lower }}_methods[] = {
 	{NULL, NULL, 0, NULL}
 };
 
-static int {{ class_name|lower }}_init(Animal *self, PyObject *args, PyObject *kwds)
+static int {{ class_name|lower }}_init({{ class_name }} *self, PyObject *args, PyObject *kwds)
 {
     PyObject *name=NULL,*tmp;
     static char *kwlist[] = {"name", NULL};
@@ -69,13 +69,13 @@ static int {{ class_name|lower }}_init(Animal *self, PyObject *args, PyObject *k
     return 0;
 }
 
-static PyObject * {{ class_name|lower }}_getname(Animal *self, void *closure)
+static PyObject * {{ class_name|lower }}_getname({{ class_name }} *self, void *closure)
 {
     Py_XINCREF(self->name);
     return self->name;
 }
 
-static int {{ class_name|lower }}_setname(Animal *self, PyObject *value, void *closure)
+static int {{ class_name|lower }}_setname({{ class_name }} *self, PyObject *value, void *closure)
 {
     if (value == NULL) {
         PyErr_SetString(PyExc_TypeError, "Cannot delete the name attribute");
@@ -142,22 +142,22 @@ static PyMethodDef module_methods[] = {
     {NULL}  /* Sentinel */
 };
 
-static PyModuleDef {{ class_name|lower }}module = {
+static PyModuleDef {{ module_name }}_module = {
     PyModuleDef_HEAD_INIT,
-    "{{ class_name|lower }}",
-    "{{ class_name|lower }} module",
+    "{{ module_name }}",
+    "{{ module_name }} module",
     -1,
     module_methods, NULL, NULL, NULL, NULL
 };
 
-PyMODINIT_FUNC PyInit_{{ class_name }}(void) {
+PyMODINIT_FUNC PyInit_{{ module_name }}(void) {
     PyObject* m;
     {{ class_name|lower }}_type.tp_new = PyType_GenericNew;
     if (PyType_Ready(&{{ class_name|lower }}_type) < 0)
-        return;
-    m = PyModule_Create(&{{ class_name|lower }}module);
+        return NULL;
+    m = PyModule_Create(&{{ module_name }}_module);
     if (m == NULL)
-        return;
+        return NULL;
     Py_INCREF(&{{ class_name|lower }}_type);
     PyModule_AddObject(m, "__version__", Py_BuildValue("s", "0.1"));
     PyModule_AddObject(m, "_{{ class_name }}", (PyObject *)&{{ class_name|lower }}_type);
