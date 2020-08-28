@@ -13,7 +13,7 @@ IS_PY3 = sys.version_info[0] == 3
 
 
 def main(module_name="demo", module_type="c", class_name=None):
-    path = os.path.dirname(__file__)
+    path = os.path.dirname(os.path.abspath(__file__))
     if IS_PY3:
         _path = os.path.join(path, "py3")
     else:
@@ -41,7 +41,7 @@ def main(module_name="demo", module_type="c", class_name=None):
     env = SandboxedEnvironment(loader=loader)
     tpl = env.get_template("setup.tpl")
     text = tpl.render({"module_name": module_name, "module_type": module_type})
-    with open("setup.py", "w") as f:
+    with open("setup_{}.py".format(module_name), "w") as f:
         f.write(text)
     print("Generate Module {} success".format(module_name))
 
@@ -56,4 +56,6 @@ if __name__ == '__main__':
     module_name = args.module_name
     module_type = args.module_type.lower()
     class_name = args.class_name
+    if module_name is None:
+        parser.print_help()
     main(module_name, module_type, class_name)
