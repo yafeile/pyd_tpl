@@ -32,7 +32,7 @@ setup(
     author="Cat",
     keywords=("pyd generate","pyd templates"),
     description="pyd generate tools",
-    long_description=read_file('pyd/README.md'),
+    long_description=read_file('pyd_tpl/README.md'),
     platforms="any",
     install_requires=['Jinja2 >=2.11.2'],
     data_files=data_files,
