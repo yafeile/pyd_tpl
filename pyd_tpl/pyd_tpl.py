@@ -47,7 +47,7 @@ def _run(module_name="demo", module_type="c", class_name=None):
 
 
 def main():
-	parser = argparse.ArgumentParser("Pyd生成工具")
+    parser = argparse.ArgumentParser("Pyd生成工具")
     parser.add_argument("module_name", type=str, help="模块名称")
     parser.add_argument("--module-type", type=str, default="c", choices=["c", "c++", "cpp"], required=False,
                         help="模块类型")
@@ -59,6 +59,7 @@ def main():
     if module_name is None:
         parser.print_help()
     _run(module_name, module_type, class_name)
-    
+
+
 if __name__ == '__main__':
     main()
