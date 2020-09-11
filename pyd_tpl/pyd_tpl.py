@@ -12,7 +12,7 @@ IS_WIN = sys.platform == "win32"
 IS_PY3 = sys.version_info[0] == 3
 
 
-def main(module_name="demo", module_type="c", class_name=None):
+def _run(module_name="demo", module_type="c", class_name=None):
     path = os.path.dirname(os.path.abspath(__file__))
     if IS_PY3:
         _path = os.path.join(path, "py3")
@@ -46,8 +46,8 @@ def main(module_name="demo", module_type="c", class_name=None):
     print("Generate Module {} success".format(module_name))
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser("Pyd生成工具")
+def main():
+	parser = argparse.ArgumentParser("Pyd生成工具")
     parser.add_argument("module_name", type=str, help="模块名称")
     parser.add_argument("--module-type", type=str, default="c", choices=["c", "c++", "cpp"], required=False,
                         help="模块类型")
@@ -58,4 +58,7 @@ if __name__ == '__main__':
     class_name = args.class_name
     if module_name is None:
         parser.print_help()
-    main(module_name, module_type, class_name)
+    _run(module_name, module_type, class_name)
+    
+if __name__ == '__main__':
+    main()

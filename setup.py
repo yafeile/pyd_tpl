@@ -35,7 +35,7 @@ setup(
     long_description=read_file('pyd_tpl/README.md'),
     platforms="any",
     install_requires=['Jinja2 >=2.11.2'],
-    data_files=data_files,
+    data_files=data_files, # 数据文件
     entry_points={
         'console_scripts': [
             'pyd-tpl=pyd_tpl.pyd_tpl:main',
