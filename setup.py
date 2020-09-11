@@ -27,12 +27,13 @@ data_files = list(data_dict.items())
 
 setup(
     name=project_name,
-    version="0.1",
+    version="0.1.2",
     url="https://github.com/yafeile/pyd_tpl",
     author="Cat",
     keywords=("pyd generate","pyd templates"),
     description="pyd generate tools",
     long_description=read_file('pyd_tpl/README.md'),
+    long_description_content_type="text/markdown",
     platforms="any",
     install_requires=['Jinja2 >=2.11.2'],
     data_files=data_files, # 数据文件
